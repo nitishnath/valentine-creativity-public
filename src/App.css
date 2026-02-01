@@ -1,0 +1,182 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.card, .success-card {
+  position: relative; /* Essential for containing the absolute 'No' button */
+  background: #fdf2f8; /* Soft pink background to match valentine vibes */
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border: 2px solid #fff; /* Cute border */
+}
+
+.main-image, .success-image {
+  width: 200px;
+  height: 210px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.question {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  /* position: relative; removed to avoid positioning context issues */
+  min-height: 60px; /* Reserve space */
+}
+
+.yes-button {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+  font-weight: bold;
+}
+
+.yes-button:hover {
+  transform: scale(1.1);
+  background-color: #f50057;
+}
+
+.no-button {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 100; /* Ensure it floats above other elements */
+}
+
+.shy-text-container {
+  height: 40px; /* Fixed height to strictly reserve space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.shy-text {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0; /* Remove margin to keep height consistent */
+  font-style: italic;
+}
+
+.success-text {
+  color: #ff4081;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.message {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.think-again-button {
+  background-color: transparent;
+  color: #888;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.2s;
+}
+
+.think-again-button:hover {
+  color: #ff4081;
+  border-color: #ff4081;
+  background-color: #fff0f5;
+}
+
+.footer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.9rem;
+  color: #888;
+  font-family: sans-serif;
+  opacity: 0.8;
+  pointer-events: none; /* Let clicks pass through just in case */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.modal-content button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ff4081;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-content button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
