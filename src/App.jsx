@@ -4,6 +4,7 @@ import './App.css';
 import  valentineImg from './assets/valentine_img.jpg';
 import  trappedImg from './assets/default-img.jpeg';
 import IntroModal from './IntroModal';
+import SharePage from './SharePage';
 
 // Placeholder for the "kissing" image/video
 const KISSING_IMG = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
@@ -14,7 +15,10 @@ function App() {
   const [showTrapped, setShowTrapped] = useState(false);
   const [noButtonPosition, setNoButtonPosition] = useState({ top: 'auto', left: 'auto', position: 'static' });
   const [isShy, setIsShy] = useState(false);
-  const [showModal, setShowModal] = useState(true);
+  
+  // 'loading', 'intro', 'share', 'content'
+  const [currentView, setCurrentView] = useState('loading');
+  
   const [userData, setUserData] = useState({
     name: '',
     valentineName: '',
@@ -22,6 +26,23 @@ function App() {
   });
   const noButtonRef = useRef(null);
   const cardRef = useRef(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sender = params.get('sender');
+    const valentine = params.get('valentine');
+
+    if (sender && valentine) {
+      setUserData({
+        name: sender,
+        valentineName: valentine,
+        photo: null
+      });
+      setCurrentView('content');
+    } else {
+      setCurrentView('intro');
+    }
+  }, []);
 
   const handleYesClick = () => {
     setAccepted(true);
@@ -83,11 +104,29 @@ function App() {
 
   const handleContinue = (data) => {
     setUserData(data);
-    setShowModal(false);
+    setCurrentView('share');
   };
 
-  if (showModal) {
+  const handlePreview = () => {
+    setCurrentView('content');
+  };
+
+  if (currentView === 'loading') {
+    return null; // Or a loading spinner
+  }
+
+  if (currentView === 'intro') {
     return <IntroModal onContinue={handleContinue} />;
+  }
+
+  if (currentView === 'share') {
+    return (
+      <SharePage 
+        name={userData.name} 
+        valentineName={userData.valentineName} 
+        onPreview={handlePreview} 
+      />
+    );
   }
 
   return (
