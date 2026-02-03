@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
-const SharePage = ({ name, valentineName, onPreview }) => {
+const SharePage = ({ name, valentineName, photoUrl, onPreview }) => {
   const [copied, setCopied] = useState(false);
 
   // Generate the shareable link using current origin and query params
-  const shareUrl = `${window.location.origin}?sender=${encodeURIComponent(name)}&valentine=${encodeURIComponent(valentineName)}`;
+  let shareUrl = `${window.location.origin}?sender=${encodeURIComponent(name)}&valentine=${encodeURIComponent(valentineName)}`;
+  if (photoUrl) {
+    shareUrl += `&photo=${encodeURIComponent(photoUrl)}`;
+  }
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shareUrl);

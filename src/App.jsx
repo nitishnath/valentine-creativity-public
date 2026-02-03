@@ -23,6 +23,7 @@ function App() {
     name: '',
     valentineName: '',
     photo: null,
+    photoUrl: '',
   });
   const noButtonRef = useRef(null);
   const cardRef = useRef(null);
@@ -31,12 +32,14 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const sender = params.get('sender');
     const valentine = params.get('valentine');
+    const photo = params.get('photo');
 
     if (sender && valentine) {
       setUserData({
         name: sender,
         valentineName: valentine,
-        photo: null
+        photo: null,
+        photoUrl: photo || ''
       });
       setCurrentView('content');
     } else {
@@ -124,6 +127,7 @@ function App() {
       <SharePage 
         name={userData.name} 
         valentineName={userData.valentineName} 
+        photoUrl={userData.photoUrl}
         onPreview={handlePreview} 
       />
     );
@@ -164,9 +168,10 @@ function App() {
         <div className="success-card">
           <h1 className="success-text">Refund Policy: REJECTED! 🚫</h1>
           <img 
-            src={userData.photo ? URL.createObjectURL(userData.photo) : trappedImg} 
+            src={userData.photo ? URL.createObjectURL(userData.photo) : (userData.photoUrl || trappedImg)} 
             alt="Cute trapped cat" 
             className="success-image"
+            onError={(e) => { e.target.onerror = null; e.target.src = trappedImg; }}
           />
           <p className="message">
             There is no go back option! You are hooked and don't ever think to go back. 
